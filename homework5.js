@@ -7,11 +7,17 @@ function customFilterUnique (array, callback) {
         if (!unique.has(key)) {
             unique.set(key, true)
             res.push(element)
+        } else {
+            const index = res.findIndex(element => callback(element) === key)
+            if (index !== -1) {
+                res.splice(index, 1)
+            }
         }
     })
 
     return res
 }
+
 
 const arr = [
     {id: 1, name: "John"},
